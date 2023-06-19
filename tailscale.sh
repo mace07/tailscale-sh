@@ -2,7 +2,7 @@
 # /config/scripts/post-config.d/tailscale.sh
 
 # check latest version against what's installed
-VER=$(curl -sL https://api.github.com/repos/tailscale/tailscale/releases/latest |  jq -r ".tag_name" | cut -c 2-)
+VER=$(curl -sLk https://api.github.com/repos/tailscale/tailscale/releases/latest |  jq -r ".tag_name" | cut -c 2-)
 if [ "$VER" != "$(tailscale version | head -n1)" ]; then
   # download latest version & unpack binaries
   curl "https://pkgs.tailscale.com/stable/tailscale_${VER}_mips.tgz" | tar xvz -C /tmp
